@@ -20,13 +20,13 @@ namespace WebAPI.Controllers
             CreatedLanguageDto result = await Mediator.Send(createLanguageCommand);
             return Created("", result);
         }
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> Delete([FromRoute] DeletedLanguageCommand deletedLanguageCommand)
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] DeletedLanguageCommand deletedLanguageCommand)
         {
             DeletedLanguageDto result = await Mediator.Send(deletedLanguageCommand);
             return Ok(result);
         }
-        
+       
 
 
         [HttpGet]

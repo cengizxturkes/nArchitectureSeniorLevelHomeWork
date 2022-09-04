@@ -31,6 +31,8 @@ namespace Application.Features.Languages.Commands.CreateLanguage
 
             public async Task<CreatedLanguageDto> Handle(CreateLanguageCommand request, CancellationToken cancellationToken)
             {
+
+
                 await _languageBusinessRules.LanguageNameCanNotBeDuplicatedWhenInserted(request.Name);
                 ProgrammingLanguage mappedLanguages = _mapper.Map<ProgrammingLanguage>(request);
                 ProgrammingLanguage createdLanguage = await _programmingRepository.AddAsync(mappedLanguages);

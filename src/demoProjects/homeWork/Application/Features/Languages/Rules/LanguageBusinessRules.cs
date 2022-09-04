@@ -24,10 +24,18 @@ namespace Application.Features.Languages.Rules
             IPaginate<ProgrammingLanguage> result = await _languageRepository.GetListAsync(b => b.Name == name);
             if (result.Items.Any()) throw new BusinessException("LanguageEntity name exists.");
         }
-        public Task LanguageShouldExistWhenRequested(ProgrammingLanguage programmingLanguage)
+        public async Task LanguageShouldExistWhenRequested(int id)
         {
-            if (programmingLanguage == null) throw new BusinessException("Requested language does not exists.");
-            return Task.CompletedTask;
+            ProgrammingLanguage result = await _languageRepository.GetAsync(pl => pl.Id == id);
+            if (result == null) throw new BusinessException("Requested language does not exists.");
+            
         }
+        public async Task ProgrammingLanguageShouldBeExist(ProgrammingLanguage programmingLanguage)
+        {
+            if (programmingLanguage == null) throw new BusinessException("Programming Language does not exist.");
+        }
+
+
+
     }
 }
