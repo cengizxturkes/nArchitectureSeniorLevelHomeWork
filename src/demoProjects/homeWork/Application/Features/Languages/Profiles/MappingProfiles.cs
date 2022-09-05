@@ -1,5 +1,6 @@
 ﻿using Application.Features.Languages.Commands.CreateLanguage;
 using Application.Features.Languages.Commands.DeletedLanguage;
+using Application.Features.Languages.Commands.UpdateLanguage;
 using Application.Features.Languages.Dtos;
 using Application.Features.Languages.Models;
 using AutoMapper;
@@ -25,6 +26,9 @@ namespace Application.Features.Languages.Profiles
             CreateMap<ProgrammingLanguage, LanguageGetByIdDto>().ReverseMap();
             CreateMap<ProgrammingLanguage, DeletedLanguageDto>().ReverseMap();
             CreateMap<DeletedLanguageCommand, ProgrammingLanguage>().ReverseMap();
+            CreateMap<ProgrammingLanguage, UpdatedLanguageDto>().ReverseMap();
+
+            CreateMap<UptadedLanguageCommand, ProgrammingLanguage>().ReverseMap();
 
 
         }

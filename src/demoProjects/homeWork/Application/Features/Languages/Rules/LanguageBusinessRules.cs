@@ -21,7 +21,7 @@ namespace Application.Features.Languages.Rules
 
         public async Task LanguageNameCanNotBeDuplicatedWhenInserted(string name)
         {
-            IPaginate<ProgrammingLanguage> result = await _languageRepository.GetListAsync(b => b.Name == name);
+            IPaginate<ProgrammingLanguage> result = await _languageRepository.GetListAsync(pl => pl.Name == name);
             if (result.Items.Any()) throw new BusinessException("LanguageEntity name exists.");
         }
         public async Task LanguageShouldExistWhenRequested(int id)
@@ -30,10 +30,13 @@ namespace Application.Features.Languages.Rules
             if (result == null) throw new BusinessException("Requested language does not exists.");
             
         }
-        public async Task ProgrammingLanguageShouldBeExist(ProgrammingLanguage programmingLanguage)
+        public async Task LanguageNameCanNotBeDuplicatedWhenUpdated(string name)
         {
-            if (programmingLanguage == null) throw new BusinessException("Programming Language does not exist.");
+            IPaginate<ProgrammingLanguage> result = await _languageRepository.GetListAsync(l => l.Name == name);
+            if (result.Items.Any())
+                throw new BusinessException("Language name exists.");
         }
+
 
 
 

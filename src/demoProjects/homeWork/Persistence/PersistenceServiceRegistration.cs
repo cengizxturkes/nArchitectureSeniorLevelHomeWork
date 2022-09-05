@@ -16,11 +16,15 @@ namespace Persistence
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services,
                                                                 IConfiguration configuration)
         {
-            services.AddDbContext<BaseDbContext>(options =>
-                                                     options.UseSqlServer(
-                                                         configuration.GetConnectionString("LanguagesHomeworkConnectionString")));
+            //services.AddDbContext<BaseDbContext>(options =>
+            //                                         options.UseSqlServer(
+            //                                             configuration.GetConnectionString("LanguagesHomeworkConnectionString")));
             services.AddScoped<IProgrammingRepository, ProgrammingRepository>();
-
+            services.AddDbContext<BaseDbContext>(options =>
+            {
+                options.EnableSensitiveDataLogging();
+                options.UseSqlServer(configuration.GetConnectionString("LanguagesHomeworkConnectionString"));
+            });
             return services;
         }
     }
